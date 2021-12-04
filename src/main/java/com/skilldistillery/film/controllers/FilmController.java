@@ -171,4 +171,43 @@ public class FilmController {
 		}
 		
 	}
+	
+	/* ------------------------------------------------
+	    deleteFilm.do (POST)
+	------------------------------------------------ */
+	@RequestMapping(path="deleteFilm.do", method=RequestMethod.POST)
+	public String deleteFilm(String filmId, Model model) {
+	
+		int filmIdInt;
+		try {
+			filmIdInt = Integer.parseInt(filmId);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			filmIdInt = -1;
+			
+		}
+		
+		Film film = filmDao.findFilmById(filmIdInt);
+		boolean deleted = false;
+		if (film != null) {
+			film = filmDao.addFilmToDatabase(film);
+			deleted = filmDao.deleteFilm(film);			
+		}
+		
+		
+		String view;
+		if (deleted) {
+			model.addAttribute("deletedFilmId",filmIdInt);	
+			view = "home";
+			
+		} else {
+			model.addAttribute("error","A failure occurred while attempting to delete the film from the database");
+			model.addAttribute("film",film);
+			view = "film";
+			
+		}
+		
+		return view;
+	}
 }
