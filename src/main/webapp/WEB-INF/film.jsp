@@ -16,6 +16,7 @@
 			</c:when>
 			<c:otherwise>
 				<h1>Sorry, film couldn't be located</h1>
+				<br>
 				<a href="home.do">Home</a>
 			</c:otherwise>
 		</c:choose>
