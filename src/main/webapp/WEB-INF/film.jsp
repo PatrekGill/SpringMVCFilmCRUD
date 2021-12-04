@@ -113,9 +113,11 @@
 					</table>
 								
 					<br>
-					<form action="EditFilm.do" id></form>
-					<a href="EditFilm.do">Edit this film</a>
 					
+				</form>
+				<form action="EditFilm.do" method="GET">
+					<input type="hidden" name="id" value="${film.id }">
+					<input type="submit" value="Edit this film">
 				</form>
 				
 			</c:when>
