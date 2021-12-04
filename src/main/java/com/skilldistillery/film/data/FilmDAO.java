@@ -12,7 +12,7 @@ public interface FilmDAO {
 
 	public List<Actor> findActorsByFilmId(int filmId);
 	
-	public Film updateFilmData(Film film, String column, Object newValue);
+	public Film updateFilmData(int filmId, String column, Object newValue);
 	
 	public Film createFilm(Film film);
 

@@ -137,7 +137,7 @@ public class Film {
 		get/set Rental Rate
 	------------------------------------------------ */	
 	public double getRentalRate() {
-		return replacementCost;
+		return rentalRate;
 	}
 	public void setRentalRate(double rentalRate) {
 		this.rentalRate = rentalRate;

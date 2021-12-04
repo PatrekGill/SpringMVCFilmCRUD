@@ -71,10 +71,10 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	/* ------------------------------------------------
 	    updateFilmData
 	------------------------------------------------ */
-	public Film updateFilmData(Film film, String column, Object newValue) {
+	public Film updateFilmData(int filmId, String column, Object newValue) {
 		Film returnedFilm = null;
 		int updateFilm = 0;
-		String sqlString = "UPDATE film SET " + column + " = " + newValue + " WHERE film.id = " + film.getId();
+		String sqlString = "UPDATE film SET " + column + " = " + newValue + " WHERE film.id = " + filmId;
 
 		Connection connection = null;
 		try {
@@ -107,7 +107,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		
 		
 		if (updateFilm == 1) {
-			returnedFilm = findFilmById(film.getId());
+			returnedFilm = findFilmById(filmId);
 		}
 		return returnedFilm;
 	}

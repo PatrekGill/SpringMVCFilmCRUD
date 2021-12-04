@@ -8,65 +8,123 @@
 		<title>Film Details</title>
 	</head>
 	<body>
+		<a href="home.do">Home</a>
+		<br>
 		<c:choose> 
 			<c:when test="${not empty film }"> 
 				<h3>Film ID: ${film.id }</h3>
 
-				<form action="" id="filmDetails">
+				<form action="GetFilmData.do" id="filmDetails" method="POST">
+				 	<input type="hidden" name="id" value="${film.id }">
+				 	
+					<table>
+						<tr>
+							<td>
+								<label for="title">Title</label> 
+							</td>
+							<td>
+								<input type="text" name="title" value="${film.title }" size="50"/> 
+							</td>
+						</tr>
 					
-					<label for="title">Title</label>
-					<input type="text" name="title" value="${film.title }" size="50"/>
-					<br>
+						<tr>
+							<td>
+								<label for="description">Description</label>
+							</td>
+							<td>
+							 	<textarea name="description" rows="5" cols="35">
+									<c:out value = "${film.description }"/>
+								</textarea>
+							</td>
+						</tr>
 					
-					<label for="description">Description</label>
-					<textarea form="filmDetails" name="description" rows="4" cols="35">
-						${film.description }
-					</textarea>
-					<%--<input type="text" name="description" value="${film.description }"/>--%>
-					<br>
-					
-					<label for="release_year">Release Year</label>
-					<input type="text" name="release_year" value="${film.releaseYear }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="releaseYear">Release Year</label>
+							</td>
+							<td>
+								<input type="text" name="releaseYear" value="${film.releaseYear }"/>							 	
+							</td>
+						</tr>
 
-					<label for="language_id">Language ID:</label>
-					<input type="text" name="language_id" value="${film.languageId }"/>
-					<br>
-
-					<label for="language">Language:</label>
-					<input type="text" name="language" value="${film.language }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="languageId">Language ID:</label>
+							</td>
+							<td>
+								<input type="text" name="languageId" value="${film.languageId }"/>
+								(${film.language })							 	
+							</td>
+						</tr>
 					
-					<label for="rental_duration">Rental Duration:</label>
-					<input type="text" name="rental_duration" value="${film.rentalDuration }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="rentalDuration">Rental Duration:</label>
+							</td>
+							<td>							 	
+								<input type="text" name="rentalDuration" value="${film.rentalDuration }"/>
+								(Days)
+							</td>
+						</tr>
 					
-					<label for="rental_rate">Rental Rate:</label>
-					<input type="text" name="rental_rate" value="${film.rentalRate }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="rentalRate">Rental Rate:</label>
+							</td>
+							<td>
+								<input type="text" name="rentalRate" value="${film.rentalRate }"/>
+								$
+							</td>
+						</tr>
 					
-					<label for="length">Film Length:</label>
-					<input type="text" name="length" value="${film.length }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="length">Film Length:</label>
+							</td>
+							<td>
+								<input type="text" name="length" value="${film.length }"/>
+								(Minutes)
+							</td>
+						</tr>
 					
-					<label for="replacement_cost">Replacement Cost:</label>
-					<input type="text" name="replacement_cost" value="${film.replacementCost }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="replacementCost">Replacement Cost:</label>
+							</td>
+							<td>
+								<input type="text" name="replacementCost" value="${film.replacementCost }"/>
+								$							 	
+							</td>
+						</tr>
 					
-					<label for="rating">Rating:</label>
-					<input type="text" name="rating" value="${film.rating }"/>
-					<br>
+						<tr>
+							<td>
+								<label for="rating">Rating:</label>
+							</td>
+							<td>
+								<input type="text" name="rating" value = "${film.rating}"/>
+							</td>
+						</tr>
+					</table>			
 					
-					
-					<input type="submit"/>
+					<input type="submit" value="Save"/>
 				</form>
 				
 			</c:when>
 			<c:otherwise>
-				<h1>Sorry, film couldn't be located</h1>
-				<br>
-				<a href="home.do">Home</a>
+				<h1>Sorry, film couldn't be located</h1>				
 			</c:otherwise>
 		</c:choose>
+		
+
+		<c:if test="${not empty failureNotices }">
+
+			<h3>Failures Occurred:</h3>
+
+			<c:forEach items="${failureNotices}" var="failure">
+				<p> <c:out value = "${failure}"/> </p>
+			</c:forEach>
+
+		</c:if>
 	</body>
 </html>
