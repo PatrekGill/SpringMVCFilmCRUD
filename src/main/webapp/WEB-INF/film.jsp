@@ -115,10 +115,15 @@
 							<td>
 								<label for="actors">Cast:</label>
 							</td>
+							
+							<c:forEach items="${actors}" var="actor">
+							<tr>
 							<td>
-								${actors}
+								<p> <c:out value="${actor}" /></p>
 								
 							</td>
+							</tr>
+							</c:forEach>
 						</tr>
 					</table>
 								
