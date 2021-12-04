@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Films Filtered</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Films Filtered</title>
+	</head>
 <body>
 	<c:choose>
 		<c:when test="${not empty films }">
-			<c:forEach items="films" var="film" >
+			<c:forEach items="films" var="film">
 				<h1>${film.title}</h1>
 				<br>
 				<p>${film.description }</p>
-				
+
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
