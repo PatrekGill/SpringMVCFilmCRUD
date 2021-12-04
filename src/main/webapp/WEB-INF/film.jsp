@@ -110,6 +110,19 @@
 								
 							</td>
 						</tr>
+						<%-- 
+						<c:if test="${not empty film.category }">
+							<tr>
+								<td>
+									<label for="category">Category:</label>
+								</td>
+								<td>
+									${film.category }
+									
+								</td>
+							</tr>			
+						</c:if>
+						--%>
 						
 						<tr>
 							<td>

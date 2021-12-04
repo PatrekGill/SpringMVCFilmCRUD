@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <jsp:useBean id="map" class="java.util.HashMap" scope="request"/>  
 <!DOCTYPE html>
 <html>
 	<head>
@@ -53,8 +54,27 @@
 								<label for="languageId">Language ID:</label>
 							</td>
 							<td>
-								<input type="number" name="languageId" min="1" max="6" step="1" value="${film.languageId }"/>
-								(${film.language })							 	
+								<c:set target="${requestScope.map}" property="1" value="English"/>  
+								<c:set target="${requestScope.map}" property="2" value="Italian"/>  
+								<c:set target="${requestScope.map}" property="3" value="Japanese"/>  
+								<c:set target="${requestScope.map}" property="4" value="Mandarin"/>  
+								<c:set target="${requestScope.map}" property="5" value="French"/>  
+								<c:set target="${requestScope.map}" property="6" value="German"/>  
+								
+								<c:forEach items="${requestScope.map}" var="language">  
+								    <c:choose>
+									
+										<c:when test="${language.key == film.languageId}">
+											<input id="${language.value }" name="languageId" type="radio" value="${language.key }" checked="checked"/>				
+										</c:when>
+										<c:otherwise>
+											<input id="${language.value }" name="languageId" type="radio" value="${language.key }"/>				
+										</c:otherwise>
+										
+									</c:choose>
+   									<label for="${language.key }">${language.key } (${language.value})</label>
+								</c:forEach>
+								
 							</td>
 						</tr>
 					
