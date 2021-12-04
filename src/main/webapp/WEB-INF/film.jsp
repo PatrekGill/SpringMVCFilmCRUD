@@ -128,6 +128,12 @@
 					<br>
 					
 				</form>
+				<span style="float:left;">
+					<form action="deleteFilm.do" method="POST">
+						<input type="hidden" name="filmId" value="${film.id }">
+						<input type="submit" value="Delete Film">					
+					</form>
+				</span>
 				<form action="EditFilm.do" method="GET">
 					<input type="hidden" name="id" value="${film.id }">
 					<input type="submit" value="Edit this film">
