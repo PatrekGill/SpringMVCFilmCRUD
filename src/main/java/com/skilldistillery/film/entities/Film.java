@@ -42,6 +42,7 @@ public class Film {
 		FilmDAO dao = new FilmDaoJdbcImpl();
 		this.language = dao.getLanguageNameById(languageId);
 		this.actors = dao.findActorsByFilmId(id);
+		this.category = dao.findCategoryByFilmId(id);
 	}
 	
 	/* ------------------------------------------------

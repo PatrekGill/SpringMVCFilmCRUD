@@ -18,6 +18,10 @@
 						<td>
 							<h3>${film.title}</h3>
 							<p>${film.description }</p>
+							
+						
+							
+							
 							<span style="float:left;">
 								<form action="deleteFilm.do" method="POST">
 									<input type="hidden" name="filmId" value="${film.id }">

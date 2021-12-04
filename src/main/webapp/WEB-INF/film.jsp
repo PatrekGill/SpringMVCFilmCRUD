@@ -126,7 +126,7 @@
 						
 						<tr>
 							<td>
-								<label for="rating">Category:</label>
+								<label for="cateogry">Category:</label>
 							</td>
 							<td>
 								${film.category }
