@@ -171,22 +171,25 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	------------------------------------------------ */
 	public boolean deleteFilm(Film film) {
 		boolean deleted = false;
-		String deleteSQL = "DELETE FROM film WHERE film.id = ?";
+		String deleteSQL = "DELETE FROM film WHERE id = ?";
 		
 		Connection connection = null;
 		try {
 			connection = openConnection();
 			connection.setAutoCommit(false);
 			
-//			System.out.println("Entries Prior To Deletion: " + getNumberOfFilms());
+			int numberOfFilmsBeforeDelete = getNumberOfFilms();
+			System.out.println("Entries Prior To Deletion: " + numberOfFilmsBeforeDelete);
 			
-			PreparedStatement addFilmStatement = connection.prepareStatement(deleteSQL);
-			addFilmStatement.setInt(1,film.getId());
-			addFilmStatement.executeUpdate();
+			PreparedStatement deletePreparedStatement = connection.prepareStatement(deleteSQL);
+			deletePreparedStatement.setInt(1,film.getId());
+			deletePreparedStatement.executeUpdate();
 						
 			connection.commit();
-//			System.out.println("Entries After Deletion: " + getNumberOfFilms());
-			addFilmStatement.close();
+			int numberOfFilmsAfterDelete = getNumberOfFilms();
+			System.out.println("Entries After Deletion: " + numberOfFilmsAfterDelete);
+			deleted = true;
+			deletePreparedStatement.close();
 			connection.close();
 			
 		} catch (SQLException e) {

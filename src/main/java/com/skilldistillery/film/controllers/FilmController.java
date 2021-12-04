@@ -179,10 +179,8 @@ public class FilmController {
 		Film film = filmDao.findFilmById(filmId);
 		boolean deleted = false;
 		if (film != null) {
-			film = filmDao.addFilmToDatabase(film);
 			deleted = filmDao.deleteFilm(film);			
 		}
-		
 		
 		String view;
 		if (deleted) {

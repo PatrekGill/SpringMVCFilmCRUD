@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +27,11 @@
 
 
 </form>
+
+<c:if test="${not empty deletedFilmId }">
+	<h3>Deleted film with ID: ${ deletedFilmId } from the database</h3>
+</c:if>
+
 
 
 </body>
