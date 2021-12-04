@@ -240,6 +240,8 @@ public class FilmController {
 	------------------------------------------------ */
 	@RequestMapping(path="EditFilm.do", method=RequestMethod.GET)
 	public String editFilm() {
-		return "EditFilm.do";
+		
+		
+		return "filmEdit";
 	}
 }

@@ -60,11 +60,11 @@
 					
 						<tr>
 							<td>
-								<label for="rentalDuration">Rental Duration:</label>
 							</td>
 							<td>
 								<input type="number" name="rentalDuration" min="0" max="255" step="1" value="${film.rentalDuration }"/>
 								(Days)
+								<label for="rentalDuration">Rental Duration:</label>
 							</td>
 						</tr>
 					

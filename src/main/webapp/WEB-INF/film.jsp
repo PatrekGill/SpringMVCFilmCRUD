@@ -110,9 +110,12 @@
 								
 							</td>
 						</tr>
-					</table>			
+					</table>
+								
 					<br>
+					<form action="EditFilm.do" id></form>
 					<a href="EditFilm.do">Edit this film</a>
+					
 				</form>
 				
 			</c:when>
