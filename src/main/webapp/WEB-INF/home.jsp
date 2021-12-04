@@ -16,8 +16,16 @@
 	<input type="submit" name="Search Film by Id" />
 	
 </form>
+<br>
 
-${TEST}
+<form action="GetFilmData.do" method="GET">
+	Search Film by keyword:
+	<input type="text" name="keyword" />
+	<input type="submit" name="Search Film by keyword" />
+
+
+</form>
+
 
 </body>
 </html>
