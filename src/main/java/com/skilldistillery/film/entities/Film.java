@@ -3,7 +3,8 @@ package com.skilldistillery.film.entities;
 import java.util.List;
 import java.util.Objects;
 
-import com.skilldistillery.film.database.DatabaseAccessorObject;
+import com.skilldistillery.film.data.FilmDAO;
+import com.skilldistillery.film.data.FilmDaoJdbcImpl;
 
 
 public class Film {
@@ -41,7 +42,7 @@ public class Film {
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
 		
-		DatabaseAccessorObject dao = new DatabaseAccessorObject();
+		FilmDAO dao = new FilmDaoJdbcImpl();
 		if (language == null) {
 			language = dao.getLanguageNameById(languageId);
 		}
@@ -100,7 +101,7 @@ public class Film {
 		return languageId;
 	}
 	public void setLanguageId(int languageId) {
-		DatabaseAccessorObject dao = new DatabaseAccessorObject();
+		FilmDAO dao = new FilmDaoJdbcImpl();
 		String language = dao.getLanguageNameById(languageId);
 		this.language = language;
 		this.languageId = languageId;
