@@ -21,15 +21,23 @@ public class FilmController {
 		
 		return "home";
 	}
-	@RequestMapping(path="GetFilmData.do", params="FilmId", method=RequestMethod.GET)
+	
+	@RequestMapping(path="GetFilmData.do", method=RequestMethod.GET)
 	public String getFilmById(String filmId, Model model) {
-		int filmIdInt = Integer.parseInt(filmId);
-		Film f = filmDao.findFilmById(filmIdInt);
+		int filmIdInt;
 		
-		model.addAttribute("film",f);
+		try {
+			filmIdInt = Integer.parseInt(filmId);
+		} catch (Exception e) {
+			filmIdInt = -1;
+		}
+		
+		Film f = filmDao.findFilmById(filmIdInt);
+		if (f != null) {			
+			model.addAttribute("film",f);
+		}
 		
 		
 		return "film";
 	}
-
 }
