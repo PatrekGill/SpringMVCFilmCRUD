@@ -12,6 +12,9 @@
 		<c:if test="${not empty newlyCreated }">
 			<h2>Creation of Film Succeeded!</h2>
 		</c:if>
+		<c:if test="${not empty error }">
+			<h3>${error }</h3>
+		</c:if>
 		
 		<c:choose> 
 			<c:when test="${not empty film }"> 
