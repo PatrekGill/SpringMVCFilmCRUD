@@ -110,24 +110,20 @@
 								
 							</td>
 						</tr>
-					</table>
-					<table>
 						
 						<tr>
 							<td>
 								<label for="actors">Cast:</label>
 							</td>
-							
-							<c:forEach items="${actors}" var="actor">
-								<tr>
-									<td>
-										<p> <c:out value="ID: ${actor.id}" /></p>
-										<p> <c:out value="Name: ${actor.firstName} ${actor.lastName}" /></p>
-									</td>
-								</tr>
-							</c:forEach>
-						</tr>
 					</table>
+							
+						<ul>
+							<c:forEach items="${actors}" var="actor">
+								<li>ID: ${actor.id}</li>
+								<li>Name: ${actor.firstName} ${actor.lastName }</li>
+								<p>-----------------------------------------</p>
+							</c:forEach>
+						</ul>
 								
 					<br>
 					
