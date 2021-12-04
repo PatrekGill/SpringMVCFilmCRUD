@@ -7,6 +7,7 @@
 <title>Spring MVC Film Site</title>
 </head>
 <body>
+<a href="addFilm.do">Add Film</a>
 <h1>Films R Us!</h1>
 <h2>Search for a film:</h2>
 

@@ -3,5 +3,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <nav>
 	<a href="home.do">Home</a>
-	<a href="AddFilm.do">Add Film</a>
+	<a href="addFilm.do">Add Film</a>
 </nav>

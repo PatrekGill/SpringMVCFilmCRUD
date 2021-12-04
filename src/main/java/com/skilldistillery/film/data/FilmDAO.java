@@ -14,7 +14,7 @@ public interface FilmDAO {
 	
 	public Film updateFilmData(int filmId, String column, Object newValue);
 	
-	public Film createFilm(Film film);
+	public Film addFilmToDatabase(Film film);
 
 	public boolean deleteFilm(Film film);
 	

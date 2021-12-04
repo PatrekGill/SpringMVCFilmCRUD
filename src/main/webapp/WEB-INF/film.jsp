@@ -9,6 +9,10 @@
 	</head>
 	<body>
 		<%@ include file="nav.jsp" %>
+		<c:if test="${not empty newlyCreated }">
+			<h2>Creation of Film Succeeded!</h2>
+		</c:if>
+		
 		<c:choose> 
 			<c:when test="${not empty film }"> 
 				<h3>Film ID: ${film.id }</h3>
@@ -49,7 +53,7 @@
 								<label for="languageId">Language ID:</label>
 							</td>
 							<td>
-								<input type="text" name="languageId" value="${film.languageId }"/>
+								<input type="number" name="languageId" min="1" max="6" step="1" value="${film.languageId }"/>
 								(${film.language })							 	
 							</td>
 						</tr>
@@ -59,7 +63,7 @@
 								<label for="rentalDuration">Rental Duration:</label>
 							</td>
 							<td>
-								<input type="number" name="rentalDuration" min="0" max="9999" step="1" value="${film.rentalDuration }"/>
+								<input type="number" name="rentalDuration" min="0" max="255" step="1" value="${film.rentalDuration }"/>
 								(Days)
 							</td>
 						</tr>
@@ -79,7 +83,7 @@
 								<label for="length">Film Length:</label>
 							</td>
 							<td>
-								<input type="number" name="length" min="0" max="255" step="1" value="${film.length }"/>
+								<input type="number" name="length" min="0" max="32767" step="1" value="${film.length }"/>
 								(Minutes)
 							</td>
 						</tr>
@@ -115,7 +119,6 @@
 								
 								</c:forTokens>
 								
-								<%--<input type="text" name="rating" value = "${film.rating}"/> --%>
 							</td>
 						</tr>
 					</table>			

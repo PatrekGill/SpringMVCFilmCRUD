@@ -54,7 +54,7 @@ public class FilmController {
 			String languageId,
 			String rentalDuration,
 			String rentalRate,
-			String filmLength,
+			String length,
 			String replacementCost,
 			String rating,
 			Model model
@@ -66,7 +66,7 @@ public class FilmController {
 		updateInstructions.add(new Pair<>("release_year", releaseYear));
 		updateInstructions.add(new Pair<>("rental_duration", rentalDuration));
 		updateInstructions.add(new Pair<>("rental_rate", rentalRate));
-		updateInstructions.add(new Pair<>("length", filmLength));
+		updateInstructions.add(new Pair<>("length", length));
 		updateInstructions.add(new Pair<>("language_id", languageId));
 		updateInstructions.add(new Pair<>("replacement_cost", replacementCost));
 		updateInstructions.add(new Pair<>("rating", "\'" + rating + "\'"));
@@ -120,7 +120,55 @@ public class FilmController {
 		return "films";
 	}
 	
-//	@RequestMapping(path="addFilm.do", method=RequestMethod.POST)
-//	public String
+	@RequestMapping(path="addFilm.do", method=RequestMethod.GET)
+	public String addFilm()	{
+		return "addFilm";
+	}
 	
+	@RequestMapping(path="addFilm.do", method=RequestMethod.POST)
+	public String addFilm(
+			String id,
+			String title,
+			String description,
+			String releaseYear,
+			String languageId,
+			String rentalDuration,
+			String rentalRate,
+			String length,
+			String replacementCost,
+			String rating,
+			Model model
+		) {
+		
+		Film film = null;
+		try {
+			int releaseYearInt = Integer.parseInt(releaseYear);
+			int languageIdInt = Integer.parseInt(languageId);
+			int rentalDurationInt = Integer.parseInt(rentalDuration);
+			int lengthInt = Integer.parseInt(length);
+			double rentalRateDouble = Double.parseDouble(rentalRate);
+			double replacementCostDouble = Double.parseDouble(replacementCost);
+			
+			film = new Film(
+					-1,	title, description, releaseYearInt, languageIdInt, 
+					rentalDurationInt, rentalRateDouble, lengthInt, replacementCostDouble, 
+					rating, ""
+				);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (film != null) {
+			film = filmDao.addFilmToDatabase(film);
+			model.addAttribute("film",film);	
+			model.addAttribute("newlyCreated",true);
+			return "film";
+			
+		} else {
+			model.addAttribute("error","A failure occurred while attempting to add the film to the database");
+			return "addFilm";
+		}
+		
+	}
 }

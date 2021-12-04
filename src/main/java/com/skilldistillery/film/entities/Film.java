@@ -22,13 +22,9 @@ public class Film {
 	private List<Actor> actors;
 	private String language;
 	
-	public Film(String title, String description, String rating, int languageId) {
-		this(-1,title,description,-1,languageId,-1,-1,-1,-1,rating,"",null);
-	}
-	
 	public Film(
 			int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
-			double rentalRate, int length, double replacementCost, String rating, String specialFeatures, String language
+			double rentalRate, int length, double replacementCost, String rating, String specialFeatures
 		) {
 		this.id = id;
 		this.title = title;
@@ -43,10 +39,7 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 		
 		FilmDAO dao = new FilmDaoJdbcImpl();
-		if (language == null) {
-			language = dao.getLanguageNameById(languageId);
-		}
-		this.language = language;
+		this.language = dao.getLanguageNameById(languageId);
 		this.actors = dao.findActorsByFilmId(id);
 	}
 	

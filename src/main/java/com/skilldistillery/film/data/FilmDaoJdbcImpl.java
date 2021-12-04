@@ -86,7 +86,6 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			
 			
 			connection.commit();
-//			connection.rollback();
 			updateFilmStatement.close();
 			connection.close();
 		
@@ -114,12 +113,12 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	
 	
 	/* ------------------------------------------------
-	    createFilm
+	    addFilmToDatabase
 	------------------------------------------------ */
-	public Film createFilm(Film film) {
+	public Film addFilmToDatabase(Film film) {
 		Film returnedFilm = null;
-		String sqlString = "INSERT INTO film (title, description, rating, language_id) " 
-							+ "VALUES (?, ?, ?, ?)";
+		String sqlString = "INSERT INTO film (title, description, rating, language_id, release_year, rental_duration, rental_rate, length, replacement_cost) " 
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		Connection connection = null;
 		try {
@@ -130,6 +129,11 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			addFilmStatement.setString(2,film.getDescription());
 			addFilmStatement.setString(3,film.getRating());
 			addFilmStatement.setInt(4,film.getLanguageId());
+			addFilmStatement.setInt(5,film.getReleaseYear());
+			addFilmStatement.setInt(6,film.getRentalDuration());
+			addFilmStatement.setDouble(7,film.getRentalRate());
+			addFilmStatement.setInt(8,film.getLength());
+			addFilmStatement.setDouble(9,film.getReplacementCost());
 			addFilmStatement.executeUpdate();
 			
 			ResultSet key = addFilmStatement.getGeneratedKeys();
@@ -139,7 +143,6 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			}
 			
 			connection.commit();
-//			connection.rollback();
 			addFilmStatement.close();
 			connection.close();
 			
@@ -175,15 +178,14 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			connection = openConnection();
 			connection.setAutoCommit(false);
 			
-			System.out.println("Entries Prior To Deletion: " + getNumberOfFilms());
+//			System.out.println("Entries Prior To Deletion: " + getNumberOfFilms());
 			
 			PreparedStatement addFilmStatement = connection.prepareStatement(deleteSQL);
 			addFilmStatement.setInt(1,film.getId());
 			addFilmStatement.executeUpdate();
 						
 			connection.commit();
-			System.out.println("Entries After Deletion: " + getNumberOfFilms());
-//			connection.rollback();
+//			System.out.println("Entries After Deletion: " + getNumberOfFilms());
 			addFilmStatement.close();
 			connection.close();
 			
@@ -222,8 +224,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			resultSet.getInt("length"),
 			resultSet.getDouble("replacement_cost"),
 			resultSet.getString("rating"),
-			resultSet.getString("special_features"),
-			getLanguageNameById(languageId)
+			resultSet.getString("special_features")
 		);
 	}
 	
