@@ -26,7 +26,7 @@
 								<label for="title">Title</label> 
 							</td>
 							<td>
-								${film.title}
+								<input type="text" name="title" value="${film.title }" size="50"/> 
 							</td>
 						</tr>
 					
@@ -35,7 +35,7 @@
 								<label for="description">Description</label>
 							</td>
 							<td>
-							 	${film.description }
+							 	<textarea name="description" rows="5" cols="35"><c:out value = "${film.description }"/></textarea>
 							</td>
 						</tr>
 					
@@ -44,7 +44,7 @@
 								<label for="releaseYear">Release Year</label>
 							</td>
 							<td>
-								${film.releaseYear }							 	
+								<input type="number" name="releaseYear" min="0" max="9999" step="1" value="${film.releaseYear }"/>							 	
 							</td>
 						</tr>
 
@@ -53,7 +53,7 @@
 								<label for="languageId">Language ID:</label>
 							</td>
 							<td>
-								${film.languageId }
+								<input type="number" name="languageId" min="1" max="6" step="1" value="${film.languageId }"/>
 								(${film.language })							 	
 							</td>
 						</tr>
@@ -63,7 +63,7 @@
 								<label for="rentalDuration">Rental Duration:</label>
 							</td>
 							<td>
-								${film.rentalDuration }
+								<input type="number" name="rentalDuration" min="0" max="255" step="1" value="${film.rentalDuration }"/>
 								(Days)
 							</td>
 						</tr>
@@ -73,7 +73,7 @@
 								<label for="rentalRate">Rental Rate:</label>
 							</td>
 							<td>
-								${film.rentalRate }
+								<input type="number" name="rentalRate" min="0" max="99.99" step="0.01" value="${film.rentalRate }"/>
 								$
 							</td>
 						</tr>
@@ -83,7 +83,7 @@
 								<label for="length">Film Length:</label>
 							</td>
 							<td>
-								${film.length }
+								<input type="number" name="length" min="0" max="32767" step="1" value="${film.length }"/>
 								(Minutes)
 							</td>
 						</tr>
@@ -93,7 +93,7 @@
 								<label for="replacementCost">Replacement Cost:</label>
 							</td>
 							<td>
-								${film.replacementCost }
+								<input type="number" name="replacementCost" min="0" max="999.99" step="0.01" value="${film.replacementCost }"/>
 								$							 	
 							</td>
 						</tr>
@@ -103,13 +103,27 @@
 								<label for="rating">Rating:</label>
 							</td>
 							<td>
-								${film.rating }
+								<c:forTokens items="G,PG,PG13,R,NC17" delims="," var="value">
+								
+									<c:choose>
+									
+										<c:when test="${value == film.rating}">
+											<input id="${value }" name="rating" type="radio" value="${value }" checked="checked"/>				
+										</c:when>
+										<c:otherwise>
+											<input id="${value }" name="rating" type="radio" value="${value }"/>				
+										</c:otherwise>
+										
+									</c:choose>
+   									<label for="${value }">${value }</label>
+								
+								</c:forTokens>
 								
 							</td>
 						</tr>
 					</table>			
-					<br>
-					<a href="EditFilm.do">Edit this film</a>
+					
+					<input type="submit" value="Save"/>
 				</form>
 				
 			</c:when>

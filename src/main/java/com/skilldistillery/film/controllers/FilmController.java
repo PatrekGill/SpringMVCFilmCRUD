@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.film.data.FilmDAO;
+import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
 import com.skilldistillery.film.misc.Pair;
 
@@ -41,6 +42,10 @@ public class FilmController {
 			model.addAttribute("film",f);
 		}
 		
+		List<Actor> actorsInFilm = filmDao.findActorsByFilmId(filmIdInt);
+		if (actorsInFilm != null) {
+			model.addAttribute("actors", actorsInFilm);
+		}
 		
 		return "film";
 	}
