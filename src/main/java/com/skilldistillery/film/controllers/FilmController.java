@@ -38,7 +38,6 @@ public class FilmController {
 		
 		Film f = filmDao.findFilmById(filmId);
 		if (f != null) {			
-			f.setCategory(filmDao.findCategoryByFilmId(filmId));
 			model.addAttribute("film",f);
 		}
 		

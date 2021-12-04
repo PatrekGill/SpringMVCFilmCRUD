@@ -18,7 +18,10 @@
 						<td>
 							<h3>${film.title}</h3>
 								<p>${film.description }</p>
-								<p>Category: ${film.category}</p>
+								<c:if test="${not empty film.category }">
+									<p>Category: ${film.category}</p>			
+								</c:if>
+								
 
 							
 						

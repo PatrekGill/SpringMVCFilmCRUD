@@ -428,7 +428,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
     findFilmsByKeyword
 	----------------------------------------------- */
 	public String findCategoryByFilmId(Integer filmId) {
-		String category = "";
+		String category = null;
 		
 		String sql = "SELECT category.name FROM category JOIN film_category ON category.id = film_category.film_id"
 				+ " JOIN film ON film_category.film_id = film.id WHERE film.id = ?";
@@ -441,7 +441,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			
 			while(rs.next()) {
 				category = rs.getString("category.name");
-				
+				System.out.println(category);
 			}
 			statement.close();
 			connection.close();
