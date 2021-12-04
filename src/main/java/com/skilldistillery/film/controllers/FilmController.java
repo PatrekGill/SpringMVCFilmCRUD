@@ -20,6 +20,9 @@ public class FilmController {
 	@Autowired
 	private FilmDAO filmDao;
 	
+	/* ------------------------------------------------
+	    home.do
+	------------------------------------------------ */	
 	@RequestMapping({"/", "home.do"})
 	public String home(Model model) {
 		model.addAttribute("TEST", "Hello, Spring MVC");
@@ -27,6 +30,9 @@ public class FilmController {
 		return "home";
 	}
 	
+	/* ------------------------------------------------
+	    GetFilmData.do (GET)
+	------------------------------------------------ */
 	@RequestMapping(path="GetFilmData.do", method=RequestMethod.GET)
 	public String getFilmById(String filmId, Model model) {
 		int filmIdInt;
@@ -49,7 +55,10 @@ public class FilmController {
 		
 		return "film";
 	}
-
+	
+	/* ------------------------------------------------
+	    GetFilms.do (POST)
+	------------------------------------------------ */
 	@RequestMapping(path="GetFilmData.do", method=RequestMethod.POST)
 	public String updateFilmData(
 			String id,
@@ -115,6 +124,9 @@ public class FilmController {
 	}
 	
 	
+	/* ------------------------------------------------
+	    GetFilms.do (GET)
+	------------------------------------------------ */
 	@RequestMapping(path="GetFilms.do", method=RequestMethod.GET)
 	public String getFilmByKeyword(String keyword, Model model) {
 		List<Film> foundFilms;
@@ -125,11 +137,19 @@ public class FilmController {
 		return "films";
 	}
 	
+	
+	/* ------------------------------------------------
+	    addFilm.do (GET)
+	------------------------------------------------ */
 	@RequestMapping(path="addFilm.do", method=RequestMethod.GET)
 	public String addFilm()	{
 		return "addFilm";
 	}
 	
+	
+	/* ------------------------------------------------
+	    addFilm.do (POST)
+	------------------------------------------------ */	
 	@RequestMapping(path="addFilm.do", method=RequestMethod.POST)
 	public String addFilm(
 			String id,
