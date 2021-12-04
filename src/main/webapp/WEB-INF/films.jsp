@@ -12,11 +12,27 @@
 	<c:choose>
 		<c:when test="${not empty films }">
 			<table>
+				
 				<c:forEach items="${films}" var="film">
-					<h1>${film.title}</h1>
-					<br>
-					<p>${film.description }</p>
-					
+					<tr>
+						<td>
+							<h3>${film.title}</h3>
+							<br>
+							<p>${film.description }</p>						
+						</td>
+						<td>
+							<form action="deleteFilm.do" method="POST">
+								<input type="hidden" name="filmId" value="${film.id }">
+								<input type="submit" value="Delete Film">					
+							</form>
+							
+							<form action="EditFilm.do" method="GET">
+								<input type="hidden" name="id" value="${film.id }">
+								<input type="submit" value="Edit Film">					
+							</form>
+												
+						</td>
+					</tr>
 				</c:forEach>
 			</table>
 		</c:when>
