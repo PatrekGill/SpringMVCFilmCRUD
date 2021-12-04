@@ -113,6 +113,16 @@
 						
 						<tr>
 							<td>
+								<label for="rating">Category:</label>
+							</td>
+							<td>
+								${film.category }
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
 								<label for="actors">Cast:</label>
 							</td>
 					</table>

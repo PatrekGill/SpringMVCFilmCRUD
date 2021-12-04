@@ -21,6 +21,7 @@ public class Film {
 	private String specialFeatures;
 	private List<Actor> actors;
 	private String language;
+	private String category;
 	
 	public Film(
 			int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
@@ -159,7 +160,18 @@ public class Film {
 		this.rating = rating;
 	}
 	
+	/* ------------------------------------------------
+    	get/set Category
+	------------------------------------------------ */
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	/* ------------------------------------------------
 	    get Special Features List
 	------------------------------------------------ */
