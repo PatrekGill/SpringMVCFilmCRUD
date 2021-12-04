@@ -418,5 +418,35 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		
 		return films;
 	}
+	
+	/* ------------------------------------------------
+    findFilmsByKeyword
+	----------------------------------------------- */
+	public String findCategoryByFilmId(Integer filmId) {
+		String category = "";
+		
+		String sql = "SELECT category.name FROM category JOIN film_category ON category.id = film_category.film_id"
+				+ " JOIN film ON film_category.film_id = film.id WHERE film.id = ?";
+		
+		try {
+			Connection connection = openConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, filmId);
+			ResultSet rs = statement.executeQuery();
+			
+			while(rs.next()) {
+				category = rs.getString("category.name");
+				
+			}
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return category;
+	}
 
 }

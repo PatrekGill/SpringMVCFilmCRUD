@@ -22,4 +22,6 @@ public interface FilmDAO {
 	
 	public List<Film> findFilmsByKeyword(String keyword);
 	
+	public String findCategoryByFilmId(Integer filmId);
+	
 }
