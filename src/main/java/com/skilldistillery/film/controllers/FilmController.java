@@ -1,5 +1,7 @@
 package com.skilldistillery.film.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,5 +41,14 @@ public class FilmController {
 		
 		
 		return "film";
+	}
+	@RequestMapping(path="GetFilmData.do",params = "keyword", method=RequestMethod.GET)
+	public String getFilmByKeyword(String keyword, Model model) {
+		List<Film> foundFilms;
+		foundFilms = filmDao.findFilmsByKeyword(keyword);
+		
+		model.addAttribute("films", foundFilms);
+		
+		return "films";
 	}
 }
