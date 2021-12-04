@@ -10,8 +10,12 @@
 <h1>Films R Us!</h1>
 <h2>Search for a film:</h2>
 
-<h3>Search By Films ID</h3>
-<form action=""></form>
+<form action="GetFilmData.do" method="GET">
+	Film ID:
+	<input type="text" name="filmId" />
+	<input type="submit" name="Search Film by Id" />
+	
+</form>
 
 ${TEST}
 
