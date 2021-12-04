@@ -34,21 +34,14 @@ public class FilmController {
 	    GetFilmData.do (GET)
 	------------------------------------------------ */
 	@RequestMapping(path="GetFilmData.do", method=RequestMethod.GET)
-	public String getFilmById(String filmId, Model model) {
-		int filmIdInt;
+	public String getFilmById(Integer filmId, Model model) {
 		
-		try {
-			filmIdInt = Integer.parseInt(filmId);
-		} catch (Exception e) {
-			filmIdInt = -1;
-		}
-		
-		Film f = filmDao.findFilmById(filmIdInt);
+		Film f = filmDao.findFilmById(filmId);
 		if (f != null) {			
 			model.addAttribute("film",f);
 		}
 		
-		List<Actor> actorsInFilm = filmDao.findActorsByFilmId(filmIdInt);
+		List<Actor> actorsInFilm = filmDao.findActorsByFilmId(filmId);
 		if (actorsInFilm != null) {
 			model.addAttribute("actors", actorsInFilm);
 		}
@@ -61,20 +54,20 @@ public class FilmController {
 	------------------------------------------------ */
 	@RequestMapping(path="GetFilmData.do", method=RequestMethod.POST)
 	public String updateFilmData(
-			String id,
+			Integer id,
 			String title,
 			String description,
-			String releaseYear,
-			String languageId,
-			String rentalDuration,
-			String rentalRate,
-			String length,
-			String replacementCost,
+			Integer releaseYear,
+			Integer languageId,
+			Integer rentalDuration,
+			Double rentalRate,
+			Integer length,
+			Double replacementCost,
 			String rating,
 			Model model
 		) {
 		
-		List<Pair<String, String>> updateInstructions = new ArrayList<>();
+		List<Pair<String, Object>> updateInstructions = new ArrayList<>();
 		updateInstructions.add(new Pair<>("title", "\'" + title + "\'")); //will show as literal string in SQL statement now
 		updateInstructions.add(new Pair<>("description","\'" + description + "\'"));
 		updateInstructions.add(new Pair<>("release_year", releaseYear));
@@ -85,21 +78,10 @@ public class FilmController {
 		updateInstructions.add(new Pair<>("replacement_cost", replacementCost));
 		updateInstructions.add(new Pair<>("rating", "\'" + rating + "\'"));
 		
-		
-		int filmId;
 		List<String> failureNotices = new ArrayList<>();
-		try {
-			filmId = Integer.parseInt(id);
-						
-		} catch (Exception e) {
-			filmId = -1;
-			failureNotices.add("Failure during update");
-			
-		}
-		
 		Film film = null;
-		for (Pair<String, String> pair : updateInstructions) {
-			Film filmTemp = filmDao.updateFilmData(filmId, pair.left(), pair.right());
+		for (Pair<String, Object> pair : updateInstructions) {
+			Film filmTemp = filmDao.updateFilmData(id, pair.left(), pair.right());
 			
 			if (filmTemp == null) {
 				String notice = "Failure on update of column: " + pair.left();
@@ -152,37 +134,29 @@ public class FilmController {
 	------------------------------------------------ */	
 	@RequestMapping(path="addFilm.do", method=RequestMethod.POST)
 	public String addFilm(
-			String id,
+			Integer id,
 			String title,
 			String description,
-			String releaseYear,
-			String languageId,
-			String rentalDuration,
-			String rentalRate,
-			String length,
-			String replacementCost,
+			Integer releaseYear,
+			Integer languageId,
+			Integer rentalDuration,
+			Double rentalRate,
+			Integer length,
+			Double replacementCost,
 			String rating,
 			Model model
 		) {
-		
 		Film film = null;
 		try {
-			int releaseYearInt = Integer.parseInt(releaseYear);
-			int languageIdInt = Integer.parseInt(languageId);
-			int rentalDurationInt = Integer.parseInt(rentalDuration);
-			int lengthInt = Integer.parseInt(length);
-			double rentalRateDouble = Double.parseDouble(rentalRate);
-			double replacementCostDouble = Double.parseDouble(replacementCost);
-			
 			film = new Film(
-					-1,	title, description, releaseYearInt, languageIdInt, 
-					rentalDurationInt, rentalRateDouble, lengthInt, replacementCostDouble, 
+					-1,	title, description, releaseYear, languageId, 
+					rentalDuration, rentalRate, length, replacementCost, 
 					rating, ""
 				);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		
 		if (film != null) {
 			film = filmDao.addFilmToDatabase(film);
@@ -201,19 +175,8 @@ public class FilmController {
 	    deleteFilm.do (POST)
 	------------------------------------------------ */
 	@RequestMapping(path="deleteFilm.do", method=RequestMethod.POST)
-	public String deleteFilm(String filmId, Model model) {
-	
-		int filmIdInt;
-		try {
-			filmIdInt = Integer.parseInt(filmId);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			filmIdInt = -1;
-			
-		}
-		
-		Film film = filmDao.findFilmById(filmIdInt);
+	public String deleteFilm(Integer filmId, Model model) {
+		Film film = filmDao.findFilmById(filmId);
 		boolean deleted = false;
 		if (film != null) {
 			film = filmDao.addFilmToDatabase(film);
@@ -223,7 +186,7 @@ public class FilmController {
 		
 		String view;
 		if (deleted) {
-			model.addAttribute("deletedFilmId",filmIdInt);	
+			model.addAttribute("deletedFilmId",filmId);	
 			view = "home";
 			
 		} else {
