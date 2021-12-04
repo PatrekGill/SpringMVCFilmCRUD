@@ -110,6 +110,8 @@
 								
 							</td>
 						</tr>
+					</table>
+					<table>
 						
 						<tr>
 							<td>
@@ -117,12 +119,12 @@
 							</td>
 							
 							<c:forEach items="${actors}" var="actor">
-							<tr>
-							<td>
-								<p> <c:out value="${actor}" /></p>
-								
-							</td>
-							</tr>
+								<tr>
+									<td>
+										<p> <c:out value="ID: ${actor.id}" /></p>
+										<p> <c:out value="Name: ${actor.firstName} ${actor.lastName}" /></p>
+									</td>
+								</tr>
 							</c:forEach>
 						</tr>
 					</table>

@@ -53,7 +53,7 @@ public class Actor {
 	
 	@Override
 	public String toString() {
-		return String.format("ID: %-7s Name: %s %s",id,firstName,lastName);
+		return String.format("ID: %-7s \nName: %s %s",id,firstName,lastName);
 	}
 	
 }
