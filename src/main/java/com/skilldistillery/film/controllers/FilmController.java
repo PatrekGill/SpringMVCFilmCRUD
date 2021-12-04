@@ -120,4 +120,7 @@ public class FilmController {
 		return "films";
 	}
 	
+//	@RequestMapping(path="addFilm.do", method=RequestMethod.POST)
+//	public String
+	
 }
