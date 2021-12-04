@@ -1,5 +1,6 @@
 package com.skilldistillery.film.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -138,6 +139,13 @@ public class Film {
 		this.rentalRate = rentalRate;
 	}
 	
+	
+	/* ------------------------------------------------
+	    get actors
+	------------------------------------------------ */
+	public List<Actor> getActors() {
+		return new ArrayList<Actor>(actors);
+	}
 	
 	
 	/* ------------------------------------------------

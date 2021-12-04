@@ -130,7 +130,7 @@
 					</table>
 							
 						<ul>
-							<c:forEach items="${actors}" var="actor">
+							<c:forEach items="${film.actors}" var="actor">
 								<li>ID: ${actor.id}</li>
 								<li>Name: ${actor.firstName} ${actor.lastName }</li>
 								<p>-----------------------------------------</p>
