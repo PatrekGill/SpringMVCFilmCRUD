@@ -235,4 +235,11 @@ public class FilmController {
 		
 		return view;
 	}
+	/* ------------------------------------------------
+    EditFilm.do (POST)
+	------------------------------------------------ */
+	@RequestMapping(path="EditFilm.do", method=RequestMethod.GET)
+	public String editFilm() {
+		return "EditFilm.do";
+	}
 }
