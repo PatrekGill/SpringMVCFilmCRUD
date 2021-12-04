@@ -17,7 +17,13 @@
 					<tr>
 						<td>
 							<h3>${film.title}</h3>
-							<p>${film.description }</p>
+								<p>${film.description }</p>
+								<p>Category: ${film.category}</p>
+
+							
+						
+							
+							
 							<span style="float:left;">
 								<form action="deleteFilm.do" method="POST">
 									<input type="hidden" name="filmId" value="${film.id }">
