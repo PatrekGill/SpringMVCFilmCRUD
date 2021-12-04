@@ -16,60 +16,60 @@ import com.skilldistillery.film.misc.Pair;
 
 @Controller
 public class FilmController {
-	
+
 	@Autowired
 	private FilmDAO filmDao;
-	
-	/* ------------------------------------------------
-	    home.do
-	------------------------------------------------ */	
-	@RequestMapping({"/", "home.do"})
+
+	/*
+	 * ------------------------------------------------ home.do
+	 * ------------------------------------------------
+	 */
+	@RequestMapping({ "/", "home.do" })
 	public String home(Model model) {
 		model.addAttribute("TEST", "Hello, Spring MVC");
-		
+
 		return "home";
 	}
-	
-	/* ------------------------------------------------
-	    GetFilmData.do (GET)
-	------------------------------------------------ */
-	@RequestMapping(path="GetFilmData.do", method=RequestMethod.GET)
-	public String getFilmById(Integer filmId, Model model) {
-		
-		Film f = filmDao.findFilmById(filmId);
-		if (f != null) {			
-			model.addAttribute("film",f);
+
+	/*
+	 * ------------------------------------------------ GetFilmData.do (GET)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "GetFilmData.do", method = RequestMethod.GET)
+	public String getFilmById(String filmId, Model model) {
+
+		try {
+			int filmIdInt = Integer.parseInt(filmId);
+			Film f = filmDao.findFilmById(filmIdInt);
+			if (f != null) {
+				model.addAttribute("film", f);
+			}
+
+			List<Actor> actorsInFilm = filmDao.findActorsByFilmId(filmIdInt);
+			if (actorsInFilm != null) {
+				model.addAttribute("actors", actorsInFilm);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		List<Actor> actorsInFilm = filmDao.findActorsByFilmId(filmId);
-		if (actorsInFilm != null) {
-			model.addAttribute("actors", actorsInFilm);
-		}
-		
+
 		return "film";
 	}
-	
-	/* ------------------------------------------------
-	    GetFilms.do (POST)
-	------------------------------------------------ */
-	@RequestMapping(path="GetFilmData.do", method=RequestMethod.POST)
-	public String updateFilmData(
-			Integer id,
-			String title,
-			String description,
-			Integer releaseYear,
-			Integer languageId,
-			Integer rentalDuration,
-			Double rentalRate,
-			Integer length,
-			Double replacementCost,
-			String rating,
-			Model model
-		) {
-		
+
+	/*
+	 * ------------------------------------------------ GetFilms.do (POST)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "GetFilmData.do", method = RequestMethod.POST)
+	public String updateFilmData(Integer id, String title, String description, Integer releaseYear, Integer languageId,
+			Integer rentalDuration, Double rentalRate, Integer length, Double replacementCost, String rating,
+			Model model) {
+
 		List<Pair<String, Object>> updateInstructions = new ArrayList<>();
-		updateInstructions.add(new Pair<>("title", "\'" + title + "\'")); //will show as literal string in SQL statement now
-		updateInstructions.add(new Pair<>("description","\'" + description + "\'"));
+		updateInstructions.add(new Pair<>("title", "\'" + title + "\'")); // will show as literal string in SQL
+																			// statement now
+		updateInstructions.add(new Pair<>("description", "\'" + description + "\'"));
 		updateInstructions.add(new Pair<>("release_year", releaseYear));
 		updateInstructions.add(new Pair<>("rental_duration", rentalDuration));
 		updateInstructions.add(new Pair<>("rental_rate", rentalRate));
@@ -77,135 +77,120 @@ public class FilmController {
 		updateInstructions.add(new Pair<>("language_id", languageId));
 		updateInstructions.add(new Pair<>("replacement_cost", replacementCost));
 		updateInstructions.add(new Pair<>("rating", "\'" + rating + "\'"));
-		
+
 		List<String> failureNotices = new ArrayList<>();
 		Film film = null;
 		for (Pair<String, Object> pair : updateInstructions) {
 			Film filmTemp = filmDao.updateFilmData(id, pair.left(), pair.right());
-			
+
 			if (filmTemp == null) {
 				String notice = "Failure on update of column: " + pair.left();
 				failureNotices.add(notice);
 			}
 			film = filmTemp;
 		}
-		
-		
+
 		if (film != null) {
-			model.addAttribute("film",film);
-			
+			model.addAttribute("film", film);
+
 		}
 
 		if (!failureNotices.isEmpty()) {
-			model.addAttribute("failureNotices",failureNotices);
-			
+			model.addAttribute("failureNotices", failureNotices);
+
 		}
-		
-		
+
 		return "film";
 	}
-	
-	
-	/* ------------------------------------------------
-	    GetFilms.do (GET)
-	------------------------------------------------ */
-	@RequestMapping(path="GetFilms.do", method=RequestMethod.GET)
+
+	/*
+	 * ------------------------------------------------ GetFilms.do (GET)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "GetFilms.do", method = RequestMethod.GET)
 	public String getFilmByKeyword(String keyword, Model model) {
 		List<Film> foundFilms;
 		foundFilms = filmDao.findFilmsByKeyword(keyword);
-		
+
 		model.addAttribute("films", foundFilms);
-		
+
 		return "films";
 	}
-	
-	
-	/* ------------------------------------------------
-	    addFilm.do (GET)
-	------------------------------------------------ */
-	@RequestMapping(path="addFilm.do", method=RequestMethod.GET)
-	public String addFilm()	{
+
+	/*
+	 * ------------------------------------------------ addFilm.do (GET)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "addFilm.do", method = RequestMethod.GET)
+	public String addFilm() {
 		return "addFilm";
 	}
-	
-	
-	/* ------------------------------------------------
-	    addFilm.do (POST)
-	------------------------------------------------ */	
-	@RequestMapping(path="addFilm.do", method=RequestMethod.POST)
-	public String addFilm(
-			Integer id,
-			String title,
-			String description,
-			Integer releaseYear,
-			Integer languageId,
-			Integer rentalDuration,
-			Double rentalRate,
-			Integer length,
-			Double replacementCost,
-			String rating,
-			Model model
-		) {
+
+	/*
+	 * ------------------------------------------------ addFilm.do (POST)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "addFilm.do", method = RequestMethod.POST)
+	public String addFilm(Integer id, String title, String description, Integer releaseYear, Integer languageId,
+			Integer rentalDuration, Double rentalRate, Integer length, Double replacementCost, String rating,
+			Model model) {
 		Film film = null;
 		try {
-			film = new Film(
-					-1,	title, description, releaseYear, languageId, 
-					rentalDuration, rentalRate, length, replacementCost, 
-					rating, ""
-				);
+			film = new Film(-1, title, description, releaseYear, languageId, rentalDuration, rentalRate, length,
+					replacementCost, rating, "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		if (film != null) {
 			film = filmDao.addFilmToDatabase(film);
-			model.addAttribute("film",film);	
-			model.addAttribute("newlyCreated",true);
+			model.addAttribute("film", film);
+			model.addAttribute("newlyCreated", true);
 			return "film";
-			
+
 		} else {
-			model.addAttribute("error","A failure occurred while attempting to add the film to the database");
+			model.addAttribute("error", "A failure occurred while attempting to add the film to the database");
 			return "addFilm";
 		}
-		
+
 	}
-	
-	/* ------------------------------------------------
-	    deleteFilm.do (POST)
-	------------------------------------------------ */
-	@RequestMapping(path="deleteFilm.do", method=RequestMethod.POST)
+
+	/*
+	 * ------------------------------------------------ deleteFilm.do (POST)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public String deleteFilm(Integer filmId, Model model) {
 		Film film = filmDao.findFilmById(filmId);
 		boolean deleted = false;
 		if (film != null) {
-			deleted = filmDao.deleteFilm(film);			
+			deleted = filmDao.deleteFilm(film);
 		}
-		
+
 		String view;
 		if (deleted) {
-			model.addAttribute("deletedFilmId",filmId);	
+			model.addAttribute("deletedFilmId", filmId);
 			view = "home";
-			
+
 		} else {
-			model.addAttribute("error","A failure occurred while attempting to delete the film from the database");
-			model.addAttribute("film",film);
+			model.addAttribute("error", "A failure occurred while attempting to delete the film from the database");
+			model.addAttribute("film", film);
 			view = "film";
-			
+
 		}
-		
+
 		return view;
 	}
-	/* ------------------------------------------------
-    EditFilm.do (GET)
-	------------------------------------------------ */
-	@RequestMapping(path="EditFilm.do", method=RequestMethod.GET)
+
+	/*
+	 * ------------------------------------------------ EditFilm.do (GET)
+	 * ------------------------------------------------
+	 */
+	@RequestMapping(path = "EditFilm.do", method = RequestMethod.GET)
 	public String editFilm(int id, Model model) {
 		Film f = filmDao.findFilmById(id);
 		model.addAttribute("film", f);
-		
-		
-		
+
 		return "filmEdit";
 	}
 }
