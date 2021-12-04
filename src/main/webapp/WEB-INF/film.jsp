@@ -110,6 +110,16 @@
 								
 							</td>
 						</tr>
+						
+						<tr>
+							<td>
+								<label for="actors">Cast:</label>
+							</td>
+							<td>
+								${actors}
+								
+							</td>
+						</tr>
 					</table>
 								
 					<br>
