@@ -211,6 +211,14 @@
                     		<c:when test="${not empty film }">
                                 <tr>
             						<td>
+            							<label for="filmID">Film ID:</label>
+            						</td>
+            						<td>
+            							${film.id}
+            						</td>
+            					</tr>
+                                <tr>
+            						<td>
             							<label for="title">Title</label>
             						</td>
             						<td>

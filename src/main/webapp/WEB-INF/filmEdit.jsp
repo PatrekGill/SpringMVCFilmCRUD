@@ -196,6 +196,11 @@
 						<tbody>
                             <c:choose>
                         		<c:when test="${not empty film }">
+                                    <tr>
+                						<td>
+                							<label for="filmID">Film ID: ${film.id}</label>
+                						</td>
+                					</tr>
         							<tr>
         								<td>
         									<label for="title">Title:</label>
