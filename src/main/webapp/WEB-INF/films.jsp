@@ -1,56 +1,3 @@
-<%--
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Films Filtered</title>
-</head>
-<body>
-	<%@ include file="nav.jsp"%>
-	<c:choose>
-		<c:when test="${not empty films }">
-			<table>
-
-				<c:forEach items="${films}" var="film">
-					<tr>
-						<td>
-							<h3>${film.title}</h3>
-							<p>${film.description }</p> <c:if
-								test="${not empty film.category }">
-								<p>Category: ${film.category}</p>
-							</c:if> <span style="float: left;">
-								<form action="deleteFilm.do" method="POST">
-									<input type="hidden" name="filmId" value="${film.id }">
-									<input type="submit" value="Delete Film">
-								</form>
-						</span>
-
-							<form action="EditFilm.do" method="GET">
-								<input type="hidden" name="id" value="${film.id }"> <input
-									type="submit" value="Edit Film">
-							</form>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</c:when>
-		<c:otherwise>
-			<h1>Sorry, film couldn't be located</h1>
-			<br>
-
-		</c:otherwise>
-	</c:choose>
-
-</body>
-</html>
---%>
-
-
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -223,11 +170,11 @@ table.table .avatar {
 						</div>
 						<div class="col-xs-6">
 							<a href="addFilm.do" class="btn btn-success">
-								<i class="material-icons">&#xE147;</i> 
+								<i class="material-icons">&#xE147;</i>
 								<span>Add New Film</span>
 							</a>
 							<a href="home.do" class="btn btn-primary">
-								<i class="material-icons">&#xE88a;</i> 
+								<i class="material-icons">&#xE88a;</i>
 								<span>Home</span>
 							</a>
 						</div>
@@ -248,16 +195,16 @@ table.table .avatar {
 							<tr>
 								<td>${film.id}</td>
 								<td>${film.title}</td>
-								<td>${film.description }</td> 
+								<td>${film.description }</td>
 								<td>${film.category}</td>
 								<td>
-									<form action="EditFilm.do" method="GET">	
+									<form action="EditFilm.do" method="GET">
 										<input type="hidden" name="id" value="${film.id }">
 										<button type="submit" class="btn btn-primary btn-sm">
 											<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
 										</button>
 									</form>
-									
+
 									<form action="deleteFilm.do" method="POST">
 										<input type="hidden" name="filmId" value="${film.id }">
 										<button type="submit" class="btn btn-danger btn-sm">
@@ -270,7 +217,7 @@ table.table .avatar {
 
 					</tbody>
 				</table>
-				
+
 			</div>
 		</div>
 	</div>
