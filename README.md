@@ -1,7 +1,7 @@
 # SpringMVCFilmCRUD
 
-![image](https://drive.google.com/file/d/185dLjZZ5fso-IunMCflGrKaPF6E31Mlx/view?usp=sharing)
-![image](https://drive.google.com/file/d/1IKJPlnyi0TBkVa6IrdcuMsDVBReS_l7p/view?usp=sharing)
+![image](https://drive.google.com/uc?export=view&id=185dLjZZ5fso-IunMCflGrKaPF6E31Mlx)
+![image](https://drive.google.com/uc?export=view&id=1IKJPlnyi0TBkVa6IrdcuMsDVBReS_l7p)
 
 
 ## Overview
