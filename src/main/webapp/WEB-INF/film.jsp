@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Edit Film</title>
+    <title>Film Details</title>
 
     <link rel="stylesheet"
        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -190,7 +190,7 @@
 					<div class="row">
 						<div class="col-xs-6">
 							<h2>
-								Manage <b>Films</b>
+								Film <b>Details</b>
 							</h2>
 						</div>
 						<div class="col-xs-6">
@@ -269,8 +269,8 @@
             							<label for="rentalRate">Rental Rate:</label>
             						</td>
             						<td>
-            							${film.rentalRate }
             							$
+            							${film.rentalRate }
             						</td>
             					</tr>
 
@@ -289,8 +289,8 @@
             							<label for="replacementCost">Replacement Cost:</label>
             						</td>
             						<td>
-            							${film.replacementCost }
             							$
+            							${film.replacementCost }
             						</td>
             					</tr>
 
@@ -324,11 +324,19 @@
         								<label for="actors">Actors:</label>
         							</td>
                                     <td>
-                                        <ul>
-                    						<c:forEach items="${film.actors}" var="actor">
-                    							<li>ID: ${actor.id} | Name: ${actor.firstName} ${actor.lastName }</li>
-                    						</c:forEach>
-                    					</ul>
+                                    	<c:choose>
+                                            <c:when test="${not empty film.actors }">
+                                                <ul>
+		                    						<c:forEach items="${film.actors}" var="actor">
+		                    							<li>ID: ${actor.id} | Name: ${actor.firstName} ${actor.lastName }</li>
+		                    						</c:forEach>
+		                    					</ul>
+                                            </c:when>
+                                            <c:otherwise>
+                                                None
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </td>
                                 </tr>
 
@@ -342,24 +350,26 @@
 					</tbody>
 
 				</table>
-                <span style="float:left;">
-                    <form action="EditFilm.do" method="GET">
-                        <input type="hidden" name="id" value="${film.id }">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-edit" style="font-size:22px; vertical-align: middle;"></i>
-                            <span style="font-size:15px; vertical-align: middle;">Edit Film</span>
-                        </button>
-                    </form>
-                </span>
-                <span style="float:right;">
-                    <form action="deleteFilm.do" method="POST">
-                        <input type="hidden" name="filmId" value="${film.id }">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-trash" style="font-size:22px; vertical-align: middle;"></i>
-                            <span style="font-size:15px; vertical-align: middle;">Delete Film</span>
-                        </button>
-                    </form>
-                </span>
+				<c:if test="${not empty film }">
+	                <span style="float:left;">
+	                    <form action="EditFilm.do" method="GET">
+	                        <input type="hidden" name="id" value="${film.id }">
+	                        <button type="submit" class="btn btn-primary">
+	                            <i class="glyphicon glyphicon-edit" style="font-size:22px; vertical-align: middle;"></i>
+	                            <span style="font-size:15px; vertical-align: middle;">Edit Film</span>
+	                        </button>
+	                    </form>
+	                </span>
+	                <span style="float:right;">
+	                    <form action="deleteFilm.do" method="POST">
+	                        <input type="hidden" name="filmId" value="${film.id }">
+	                        <button type="submit" class="btn btn-danger">
+	                            <i class="glyphicon glyphicon-trash" style="font-size:22px; vertical-align: middle;"></i>
+	                            <span style="font-size:15px; vertical-align: middle;">Delete Film</span>
+	                        </button>
+	                    </form>
+	                </span>
+				</c:if>
 			</div>
 		</div>
 	</div>

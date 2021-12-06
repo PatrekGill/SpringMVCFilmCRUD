@@ -175,7 +175,7 @@ table.table .avatar {
 					<div class="row">
 						<div class="col-xs-6">
 							<h2>
-								Manage <b>Films</b>
+								Add <b>Film</b>
 							</h2>
 						</div>
 						<div class="col-xs-6">

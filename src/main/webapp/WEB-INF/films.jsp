@@ -165,7 +165,7 @@ table.table .avatar {
 					<div class="row">
 						<div class="col-xs-6">
 							<h2>
-								Manage <b>Films</b>
+								Films <b>List</b>
 							</h2>
 						</div>
 						<div class="col-xs-6">
@@ -181,41 +181,50 @@ table.table .avatar {
 					</div>
 				</div>
 				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Category</th>
-						</tr>
-					</thead>
-					<tbody>
+					<c:choose>
+						<c:when test="${not empty films}">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Title</th>
+									<th>Description</th>
+									<th>Category</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${films}" var="film">
+									<tr>
+										<td>${film.id}</td>
+										<td>${film.title}</td>
+										<td>${film.description }</td>
+										<td>${film.category}</td>
+										<td>
+											<form action="EditFilm.do" method="GET">
+												<input type="hidden" name="id" value="${film.id }">
+												<button type="submit" class="btn btn-primary btn-sm">
+													<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+												</button>
+											</form>
 
-						<c:forEach items="${films}" var="film">
-							<tr>
-								<td>${film.id}</td>
-								<td>${film.title}</td>
-								<td>${film.description }</td>
-								<td>${film.category}</td>
-								<td>
-									<form action="EditFilm.do" method="GET">
-										<input type="hidden" name="id" value="${film.id }">
-										<button type="submit" class="btn btn-primary btn-sm">
-											<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-										</button>
-									</form>
-
-									<form action="deleteFilm.do" method="POST">
-										<input type="hidden" name="filmId" value="${film.id }">
-										<button type="submit" class="btn btn-danger btn-sm">
-											<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-										</button>
-									</form>
-								</td>
-							</tr>
-						</c:forEach>
-
-					</tbody>
+											<form action="deleteFilm.do" method="POST">
+												<input type="hidden" name="filmId" value="${film.id }">
+												<button type="submit" class="btn btn-danger btn-sm">
+													<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+												</button>
+											</form>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</c:when>
+						<c:otherwise>
+							<tbody>
+								<tr>
+									<td>Found no results for that search</td>
+								</tr>
+							</tbody>
+						</c:otherwise>
+					</c:choose>
 				</table>
 
 			</div>
