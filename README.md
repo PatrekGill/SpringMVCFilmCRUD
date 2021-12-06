@@ -37,7 +37,8 @@ Mostly just cementing of the process. These are tools that we have finally used 
 Certainly the `.jsp`'s are not as succinct as they could or even should be.
 There are likely better ways of managing the repeated information between each of these files.
 <br>
-**Consistency**
+<br>
+**Consistency:**
 <br>
 There are plenty of areas within the code that could be simplified and make better use of conventions to provide an easier reading experience.
 Mostly the `FilmController` class seems to suffer from this as the methods are inconsistent in their parameters types and names.
