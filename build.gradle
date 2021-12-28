@@ -4,10 +4,7 @@ plugins {
 	id 'java'
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ed6fbb7d0910a75e1a15407c3abf540634e9c60b
 apply plugin: 'war'
 war {
   enabled = true
@@ -17,10 +14,6 @@ war {
   destinationDirectory = file("../")     // Project workspace directory
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ed6fbb7d0910a75e1a15407c3abf540634e9c60b
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -35,7 +28,7 @@ dependencies {
     implementation 'javax.servlet:jstl:1.2'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation ('org.springframework.boot:spring-boot-starter-tomcat')
-	
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
