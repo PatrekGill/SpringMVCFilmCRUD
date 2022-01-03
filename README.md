@@ -1,5 +1,5 @@
 # Deployed Site
-You can see a live version deployed to an AWS server ![here](http://3.142.158.128:8080/MVCFilmSite/).
+You can see a live version deployed to an AWS server [here](http://3.142.158.128:8080/MVCFilmSite/).
 
 # SpringMVCFilmCRUD
 
